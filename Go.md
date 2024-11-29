@@ -1,4 +1,47 @@
+## Утилиты
+* go doc <package/func> - просмотр документации
+  go doc fmt.Println
+  go doc fmt
+* godoc -http=:[port] - открыть документацию на порте [port] (0-1023 для служебного использования и могут быть задействованы только root-ом). Без знака равно работает эквивалентно. Доступно на localhost:[port]
+* go build [gofile]- компиляция, создание бинарного исполняемого файла. Флаг -o [binname] [gofile] задает имя файла. Если не задан [gofile], ищет пакет main в текущем каталоге.
+* go run [gofile] - создает именованый go-пакет, временный имполняемый файл, выполняет его и удаляет после завершения.
+
+## Компиляция
+
+
+## Дженерики
+![image](https://github.com/user-attachments/assets/974362ea-9ce3-41b2-8671-10e018d1ee1c)
+```golang
+package main
+
+import "fmt"
+
+// Определяем наш собственный constraint.
+type Number interface {
+    int | float64 // Может быть int или float64.
+}
+
+// UniversalAdd принимает два параметра любого типа, определенного в Number.
+func UniversalAdd[T Number](a, b T) T {
+    return a + b
+}
+
+func main() {
+    // Работает с int.
+    fmt.Println(UniversalAdd[int](1, 2))
+
+    // Работает с float64.
+    fmt.Println(UniversalAdd[float64](1.5, 2.3))
+}
+```
+
+## Рефлксия
+
+
 ## Процессы, потоки, горутины
+
+Горутина - наименьшая исполняемая сущность в go.
+Канал в go - механизм, который помимо прочего позволяет горутинам взаимодействовать и обмениваться данными.
 
 
 ## Планировщик
